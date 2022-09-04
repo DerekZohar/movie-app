@@ -13,7 +13,7 @@ export const Film = (props: any) => {
         {props.original_name || props.original_title}
       </p>
       <div className="flex absolute top-[2%] right-[3%] bg-blue-500 px-2 rounded-full text-white items-center gap-1">
-        <span className="text-sm">4.5</span>
+        <span className="text-sm">{props.vote_average.toFixed(1)}</span>
         <img src="/icons/star.svg" alt="" className="w-3 h-3 object-contain" />
       </div>
     </div>

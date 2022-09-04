@@ -17,3 +17,10 @@ export const getHomeFilms = (type: "movie" | "tv" | "anime") => {
     axiosClient.get(`/${type}/upcoming`),
   ]);
 };
+
+export const getExploreFilms = (type: "movie" | "tv" | "anime", page: number) =>
+  axiosClient.get(`/discover/${type}`, {
+    params: {
+      page,
+    },
+  });

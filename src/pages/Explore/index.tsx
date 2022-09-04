@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { Film } from "../../components/Common/Film";
-import { tabs } from "../../shared/constants";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
-import { SelectFilter } from "../../components/Common/SelectFilter";
 import { TypeSelect } from "../../components/Common/TypeSelect";
+import { getExploreFilms } from "../../shared/home";
+import { useQuery, useInfiniteQuery } from "react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export const ExplorePage = () => {
-  const [filterClicked, setFilterClicked] = useState(false);
-  const [searchParams] = useSearchParams();
+  // const [filterClicked, setFilterClicked] = useState(false);
+  // const [searchParams] = useSearchParams();
+  // const [currentPage, setCurrentPage] = useState(1);
+
+  // const { isLoading, data } = useQuery("explore", () =>
+  //   getExploreFilms("movie", currentPage)
+  // );
+
+  // const films = data != undefined ? data?.data.results : [];
+  const {
+    data: movies,
+    error: errorMovies,
+    fetchNextPage: fetchNextPageMovie,
+    hasNextPage: hasNextPageMovie,
+  } = useInfiniteQuery(
+    ["explore-result-movie"],
+    ({ pageParam = 1 }) => getExploreFilms("movie", pageParam),
+    {
+      getNextPageParam: (lastPage: any) => lastPage.data.page + 1,
+    }
+  );
 
   return (
-    <div className="p-8 flex">
-      <div className="">
+    <div className="p-8 flex  w-full">
+      <div className=" w-full">
         <div className="flex justify-between items-center">
           <TypeSelect />
           <div className="flex gap-4 items-center">
@@ -38,11 +58,26 @@ export const ExplorePage = () => {
           <SelectFilter />
           <SelectFilter />
         </div> */}
-        <div className="grid grid-cols-5 gap-4 mt-4">
-          {Array.from({ length: 20 }).map((_, index) => (
-            <Film key={index} />
-          ))}
-        </div>
+        {/* <div className="grid grid-cols-5 gap-6 mt-4 w-full"> */}
+        <InfiniteScroll
+          dataLength={movies?.pages.length || 0}
+          next={() => fetchNextPageMovie()}
+          hasMore={Boolean(hasNextPageMovie)}
+          loader={<div>Loading...</div>}
+          endMessage={<></>}
+        >
+          <div className="grid grid-cols-5 gap-6 mt-4 w-full">
+            {movies?.pages
+              .reduce(
+                (acc: any, page: any) => [...acc, ...page.data.results],
+                []
+              )
+              .map((film: any) => (
+                <Film key={film.id} {...film} />
+              ))}
+          </div>
+        </InfiniteScroll>
+        {/* </div> */}
       </div>
     </div>
   );
