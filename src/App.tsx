@@ -1,7 +1,28 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { HomeLayout } from "./components/Layouts/HomeLayout";
+import { ExplorePage } from "./pages/Explore";
+import Home from "./pages/Home";
+import { SearchPage } from "./pages/SearchPage";
 
 function App() {
-  return <h1 className="text-4xl font-bold underline">Hello world!</h1>;
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomeLayout />}>
+            <Route index element={<Home />} />
+
+            <Route path="/explore" element={<ExplorePage />} />
+            <Route path="/tv" element={<Home />} />
+            <Route path="/anime" element={<Home />} />
+            <Route path="search" element={<SearchPage />} />
+          </Route>
+          <Route path="*" element={<h1>404</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

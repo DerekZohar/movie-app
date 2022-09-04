@@ -15,3 +15,43 @@ code {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Customs utilities */
+
+.transition-300 {
+  transition: all 0.3s ease-in-out;
+}
+
+.tw-black-backdrop {
+  background: linear-gradient(to left, transparent, rgba(0, 0, 0, 0.85) 65%);
+}
+
+/* swiper */
+/* .swiper {
+  width: 100%;
+  height: 100%;
+}  */
+/* .swiper-pagination-bullet{
+  background: blue !important;
+}
+.swiper-pagination-bullet-active-main{
+  background: #fff !important;
+} */
+
+/* .tw-section-slider .swiper-button-prev {
+  --swiper-navigation-size: 25px !important;
+  z-index: 20 !important;
+}
+
+.tw-section-slider .swiper-button-next {
+  --swiper-navigation-size: 25px !important;
+  z-index: 20 !important;
+} */
+
+.tw-section-slider .swiper-button-prev {
+  @apply !top-[6%] !right-[2%] hidden sm:block;
+}
+
+.tw-section-slider .swiper-button-next {
+  @apply !top-[1%] !right-[5%] hidden sm:block;
+}
