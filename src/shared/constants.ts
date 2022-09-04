@@ -11,3 +11,18 @@ export const SUPPORTED_QUERY = {
   from: [],
   to: [],
 };
+
+export const tabs = [
+  {
+    title: "Movie",
+    path: "movie",
+  },
+  {
+    title: "Tv Show",
+    path: "tv",
+  },
+  {
+    title: "Anime",
+    path: "anime",
+  },
+];

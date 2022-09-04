@@ -1,14 +1,21 @@
 import React from "react";
+import { IMAGE_URL } from "../../shared/constants";
 
-export const Film = () => {
+export const Film = (props: any) => {
   return (
-    <div className=" cursor-pointer transition-300 w-full h-[300px]">
+    <div className="relative cursor-pointer transition-300 w-full h-[300px]">
       <img
-        src="https://c4.wallpaperflare.com/wallpaper/974/565/254/windows-11-windows-10-minimalism-hd-wallpaper-thumb.jpg"
+        src={IMAGE_URL + "/w342" + props.poster_path}
         alt=""
-        className="w-full h-[90%] rounded-md"
+        className="w-full h-[90%] rounded-md object-cover"
       />
-      <p className="text-center font-semibold">The sandman</p>
+      <p className="text-center font-semibold">
+        {props.original_name || props.original_title}
+      </p>
+      <div className="flex absolute top-[2%] right-[3%] bg-blue-500 px-2 rounded-full text-white items-center gap-1">
+        <span className="text-sm">4.5</span>
+        <img src="/icons/star.svg" alt="" className="w-3 h-3 object-contain" />
+      </div>
     </div>
   );
 };

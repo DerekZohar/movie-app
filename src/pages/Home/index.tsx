@@ -1,50 +1,42 @@
-import { NavLink } from "react-router-dom";
 import { SearchInput } from "../../components/Common/SearchInput";
 import { SectionSlider } from "../../components/Common/SectionSlider";
+import { TypeSelect } from "../../components/Common/TypeSelect";
 import { Banner } from "../../components/Home/Banner";
 import { WishlistCard } from "../../components/Home/WishlistCard";
-
-const tabs = [
-  {
-    title: "Movie",
-    path: "/movie",
-  },
-  {
-    title: "Tv Show",
-    path: "/tv",
-  },
-  {
-    title: "Anime",
-    path: "/anime",
-  },
-];
+import { useGenre } from "../../hooks/useGenre";
+import { getHomeFilms } from "../../shared/home";
+import { useQuery } from "react-query";
 
 export default function Home() {
+  const { isLoading, isFetched, data } = useQuery("home", () =>
+    getHomeFilms("movie")
+  );
+
   return (
     <div className="flex">
       {/* content */}
       <div className="w-[800px] flex flex-col gap-6 p-8">
         <div className="flex justify-between items-center">
-          <div className="flex gap-2">
-            {tabs.map((tab) => (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "text-black" : "text-gray-400"
-                }
-                to={tab.path}
-              >
-                {tab.title}
-              </NavLink>
-            ))}
-          </div>
+          <TypeSelect />
           <div>Light/Night</div>
         </div>
+        <Banner
+          data={data != undefined ? data[0].data.results : []}
+          type={"movie"}
+        />
 
-        <Banner />
-
-        <SectionSlider title="Popular" data={[]} />
-        <SectionSlider title="Top rated" data={[]} />
-        <SectionSlider title="Trending" data={[]} />
+        <SectionSlider
+          title="Popular"
+          data={data != undefined ? data[1].data.results : []}
+        />
+        <SectionSlider
+          title="Top rated"
+          data={data != undefined ? data[2].data.results : []}
+        />
+        <SectionSlider
+          title="Upcoming"
+          data={data != undefined ? data[3].data.results : []}
+        />
       </div>
       {/* right section */}
       <div className="w-[30%] h-screen border-l-2  pt-6 px-8 sticky top-0">
@@ -67,12 +59,12 @@ export default function Home() {
           <div className="flex justify-between items-center">
             <p className="text-lg font-semibold">Wishlist</p>
             <p className="text-sm text-gray-400 cursor-pointer hover:text-black">
-              See all{" "}
+              See all
             </p>
           </div>
           <div className="flex flex-col gap-2 mt-2">
             {[1, 2, 3, 4, 5].map((item) => (
-              <WishlistCard />
+              <WishlistCard key={item} />
             ))}
           </div>
         </div>

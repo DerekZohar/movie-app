@@ -49,14 +49,13 @@ export const SectionSlider: FC<Props> = (props) => {
           loop={true}
           autoplay={{ delay: 5000, disableOnInteraction: false }}
           slidesPerView={4}
-          onSlideChange={() => console.log("slide change")}
           spaceBetween={50}
           className="rounded-lg tw-section-slider"
           slideNextClass="sw-button-next"
         >
-          {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((film, index) => (
+          {props.data.map((film, index) => (
             <SwiperSlide key={index} className="w-[175px]">
-              <Film />
+              <Film {...film} />
             </SwiperSlide>
           ))}
         </Swiper>
