@@ -26,7 +26,9 @@ function App() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="parties" element={<PartiesPage />} />
       </Route>
-      <Route path="/movie/:id" element={<MovieDetailPage />}></Route>
+      <Route path="/movie/:id" element={<HomeLayout />}>
+        <Route index element={<MovieDetailPage />} />
+      </Route>
       <Route path="/explore" element={<HomeLayout />}>
         <Route index element={<ExplorePage />} />
       </Route>
