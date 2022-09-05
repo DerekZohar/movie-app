@@ -1,9 +1,14 @@
 import React from "react";
 import { IMAGE_URL } from "../../shared/constants";
+import { useNavigate } from "react-router-dom";
 
 export const Film = (props: any) => {
+  const navigate = useNavigate();
   return (
-    <div className="relative cursor-pointer transition-300 w-full h-[300px]">
+    <div
+      className="relative cursor-pointer transition-300 w-full h-[300px]"
+      onClick={() => navigate("/movie/" + props.id)}
+    >
       <img
         src={IMAGE_URL + "/w342" + props.poster_path}
         alt=""

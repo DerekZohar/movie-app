@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const sides = {
@@ -36,37 +37,52 @@ const Avatar = () => {
 
 export const SideBar = () => {
   let navigate = useNavigate();
+  const [sbOpen, setSbOpen] = useState(true);
+
   return (
-    <div className="w-[250px] h-screen border-r-2 pl-12 py-4 flex flex-col sticky top-0">
-      <h2 className="text-2xl font-medium">MoClub</h2>
+    <div
+      className={
+        "h-screen sticky top-0 transition-all .3s ease-in-out " +
+        (sbOpen ? "w-[250px]" : "w-[100px]")
+      }
+    >
+      <div className="h-full w-full border-r-2 pl-12 py-4 flex flex-col ">
+        <img
+          src="/icons/left.svg"
+          alt=""
+          className="w-4 h-4 border rounded-full absolute top-4 -right-2 cursor-pointer bg-white"
+          onClick={() => setSbOpen((val) => !val)}
+        />
+        <h2 className="text-2xl font-medium">MoClub</h2>
 
-      <div className="flex-1 flex flex-col justify-between">
-        <div className="flex flex-col gap-12 mt-6">
-          {Object.entries(sides).map(([key, value]) => (
-            <div key={key} className="">
-              <h4 className="text-gray-400 text-sm capitalize">{key}</h4>
-              <div className="flex flex-col justify-center gap-6 mt-4 text-gray-400">
-                {value.map((route) => (
-                  <div
-                    key={route.name}
-                    className={
-                      "flex gap-6 cursor-pointer hover:text-blue-500 hover:border-blue-500 transition-300" +
-                      (route.path === window.location.pathname
-                        ? " text-blue-500 border-r-4 border-blue-500"
-                        : "")
-                    }
-                    onClick={() => navigate(route.path)}
-                  >
-                    <img src={"/icons/sidebar/" + route.icon} alt="" />
-                    <p className="font-semibold">{route.name}</p>
-                  </div>
-                ))}
+        <div className="flex-1 flex flex-col justify-between">
+          <div className="flex flex-col gap-12 mt-6">
+            {Object.entries(sides).map(([key, value]) => (
+              <div key={key} className="">
+                <h4 className="text-gray-400 text-sm capitalize">{key}</h4>
+                <div className="flex flex-col justify-center gap-6 mt-4 text-gray-400">
+                  {value.map((route) => (
+                    <div
+                      key={route.name}
+                      className={
+                        "flex gap-6 cursor-pointer hover:text-blue-500 hover:border-blue-500 transition-300" +
+                        (route.path === window.location.pathname
+                          ? " text-blue-500 border-r-4 border-blue-500"
+                          : "")
+                      }
+                      onClick={() => navigate(route.path)}
+                    >
+                      <img src={"/icons/sidebar/" + route.icon} alt="" />
+                      <p className="font-semibold">{route.name}</p>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <Avatar />
+          <Avatar />
+        </div>
       </div>
     </div>
   );

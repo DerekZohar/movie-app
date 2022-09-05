@@ -55,3 +55,7 @@ code {
 .tw-section-slider .swiper-button-next {
   @apply !top-[1%] !right-[5%] hidden sm:block;
 }
+
+/* .vote-bg{
+  background: linear-gradient(to right, #fbff00, #aeb100 );
+} */

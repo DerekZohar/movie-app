@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGenre } from "../../hooks/useGenre";
-import axiosClient from "../../shared/api/config";
 import { IMAGE_URL } from "../../shared/constants";
 
 interface BannerProps {
@@ -32,33 +30,34 @@ export const Banner = (props: BannerProps) => {
   );
 };
 const BannerItem = (props: any) => {
-  const genres = useGenre();
+  const genres = useGenre(props.type, props.genre_ids);
 
-  const renderGenres = (num: number) => {
-    return (
-      genres !== undefined &&
-      genres[num].data.genres.map((genre: any) => {
-        if (props.genre_ids.includes(genre.id)) {
-          return (
-            <span
-              key={genre.id}
-              className="text-sm text-gray-400 border border-gray-400 rounded-full px-2 py-1 mr-1"
-            >
-              {genre.name}
-            </span>
-          );
-        }
-      })
-    );
-  };
-  let genresTags = <div></div>;
-  if (genres !== undefined) {
-    if (props.type === "movie") {
-      genresTags = renderGenres(1);
-    } else {
-      genresTags = renderGenres(0);
-    }
-  }
+  // console.log(genres1);
+  // const renderGenres = (num: number) => {
+  //   return (
+  //     genres !== undefined &&
+  //     genres[num].data.genres.map((genre: any) => {
+  //       if (props.genre_ids.includes(genre.id)) {
+  //         return (
+  //           <span
+  //             key={genre.id}
+  //             className="text-sm text-gray-400 border border-gray-400 rounded-full px-2 py-1 mr-1"
+  //           >
+  //             {genre.name}
+  //           </span>
+  //         );
+  //       }
+  //     })
+  //   );
+  // };
+  // let genresTags = <div></div>;
+  // if (genres !== undefined) {
+  //   if (props.type === "movie") {
+  //     genresTags = renderGenres(1);
+  //   } else {
+  //     genresTags = renderGenres(0);
+  //   }
+  // }
 
   return (
     <div className="relative cursor-pointer">
@@ -87,7 +86,16 @@ const BannerItem = (props: any) => {
             Release: {props.first_air_date || props.release_date}
           </p>
         </div>
-        <div className="flex gap-2 flex-wrap">{genresTags}</div>
+        <div className="flex gap-2 flex-wrap">
+          {genres.map((genre: any) => (
+            <span
+              key={genre.id}
+              className="text-sm text-gray-400 border border-gray-400 rounded-full px-2 py-1 mr-1"
+            >
+              {genre.name}
+            </span>
+          ))}
+        </div>
         <p className="text-gray-400 line-clamp-4">{props.overview}</p>
       </div>
     </div>
