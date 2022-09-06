@@ -1,11 +1,13 @@
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Film } from "../../components/Common/Film";
 import { SectionSlider } from "../../components/Common/SectionSlider";
 import getImage from "../../shared/getImage";
 import { getDetailFilm } from "../../shared/home";
 import { Cast } from "./Cast";
 
 export const MovieDetail = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const { data } = useQuery("detail-movie", () => {
     if (params.id) {
@@ -33,10 +35,10 @@ export const MovieDetail = () => {
           }}
         ></div>
         <div className="absolute top-20 flex gap-12 w-[80%] ">
-          <div className="flex justify-center items-center relative w-[200px] h-[300px] rounded-md group">
+          <div className="flex justify-center items-center relative w-[200px] h-[300px] group">
             <div
               className="absolute top-0 left-0 w-full h-full transition .3s ease bg-center bg-cover 
-              group-hover:brightness-50"
+              group-hover:brightness-50  rounded-md"
               style={{
                 backgroundImage: `url(${getImage(
                   film.poster_path,
@@ -48,6 +50,7 @@ export const MovieDetail = () => {
               src="/icons/play.svg"
               alt=""
               className="w-12 h-12 hidden group-hover:block z-10 cursor-pointer"
+              onClick={() => navigate("/watch")}
             />
 
             <div className="absolute top-1 left-0 w-full flex justify-between invert px-1">
@@ -162,14 +165,24 @@ export const MovieDetail = () => {
             ))}
           </div>
         </div>
-        <div className="text-white">
-          <SectionSlider
+
+        <div className="text-white ">
+          {/* <SectionSlider
             title="Similar"
             data={similarVideos.slice(0, 8)}
             className="text-xl uppercase tracking-widest font-semibold mb-4"
-          />
+          /> */}
+          <p className="text-xl uppercase tracking-widest font-semibold">
+            Similar
+          </p>
+          <div className="mt-4 grid grid-cols-5 gap-8 space-y-4">
+            {similarVideos.slice(0, 10).map((film: any) => (
+              <Film key={film.title} {...film} />
+            ))}
+          </div>
         </div>
       </div>
+      <div className="h-12"></div>
     </div>
   );
 };

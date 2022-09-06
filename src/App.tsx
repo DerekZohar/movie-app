@@ -4,7 +4,7 @@ import "./App.css";
 import { HomeLayout } from "./components/Layouts/HomeLayout";
 import { ExplorePage } from "./pages/Explore";
 import { MovieDetail } from "./pages/Explore/MovieDetail";
-import { MovieDetailPage } from "./pages/Explore/MovieDetailPage";
+import { MovieWatch } from "./pages/Explore/MovieWatch";
 import { HistoryPage } from "./pages/History";
 import Home from "./pages/Home";
 import { PartiesPage } from "./pages/Parties";
@@ -26,9 +26,11 @@ function App() {
         <Route path="history" element={<HistoryPage />} />
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="parties" element={<PartiesPage />} />
+        <Route path="/movie/:id" element={<MovieDetail />}>
+          <Route path="watch" element={<MovieWatch />} />
+        </Route>
       </Route>
-      <Route path="/movie/:id" element={<MovieDetailPage />}></Route>
-      <Route path="/movie1/:id" element={<MovieDetail />}></Route>
+      {/* <Route path="/movie/:id" element={<MovieDetail />}></Route> */}
       <Route path="/explore" element={<HomeLayout />}>
         <Route index element={<ExplorePage />} />
       </Route>
