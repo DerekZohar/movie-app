@@ -3,11 +3,13 @@ import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Film } from "../../components/Common/Film";
 import useSwiperRef from "../../hooks/useSwiperRef";
+import { PartyCard } from "./PartyCard";
 
 interface Props {
   title: string;
   data: any[];
   type?: "movie" | "tv" | "anime" | "party";
+  className?: string;
 }
 
 export const SectionSlider: FC<Props> = (props) => {
@@ -17,7 +19,11 @@ export const SectionSlider: FC<Props> = (props) => {
   return (
     <>
       <div className="flex justify-between">
-        <p className="font-semibold text-xl capitalize">{props.title}</p>
+        {props.title !== "" && (
+          <p className={props.className ?? "font-semibold text-xl capitalize"}>
+            {props.title}
+          </p>
+        )}
         <div className="flex gap-2">
           <button ref={prevElRef}>
             <img

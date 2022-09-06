@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import { HomeLayout } from "./components/Layouts/HomeLayout";
 import { ExplorePage } from "./pages/Explore";
+import { MovieDetail } from "./pages/Explore/MovieDetail";
 import { MovieDetailPage } from "./pages/Explore/MovieDetailPage";
 import { HistoryPage } from "./pages/History";
 import Home from "./pages/Home";
@@ -27,6 +28,7 @@ function App() {
         <Route path="parties" element={<PartiesPage />} />
       </Route>
       <Route path="/movie/:id" element={<MovieDetailPage />}></Route>
+      <Route path="/movie1/:id" element={<MovieDetail />}></Route>
       <Route path="/explore" element={<HomeLayout />}>
         <Route index element={<ExplorePage />} />
       </Route>
