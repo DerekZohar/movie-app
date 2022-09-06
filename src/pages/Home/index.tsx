@@ -1,11 +1,10 @@
+import { useQuery } from "react-query";
 import { SearchInput } from "../../components/Common/SearchInput";
 import { SectionSlider } from "../../components/Common/SectionSlider";
 import { TypeSelect } from "../../components/Common/TypeSelect";
 import { Banner } from "../../components/Home/Banner";
 import { WishlistCard } from "../../components/Home/WishlistCard";
-import { useGenre } from "../../hooks/useGenre";
 import { getHomeFilms } from "../../shared/home";
-import { useQuery } from "react-query";
 
 export default function Home() {
   const { isLoading, isFetched, data } = useQuery("home", () =>
@@ -21,21 +20,21 @@ export default function Home() {
           <div>Light/Night</div>
         </div>
         <Banner
-          data={data != undefined ? data[0].data.results : []}
+          data={data !== undefined ? data[0].data.results : []}
           type={"movie"}
         />
 
         <SectionSlider
           title="Popular"
-          data={data != undefined ? data[1].data.results : []}
+          data={data !== undefined ? data[1].data.results : []}
         />
         <SectionSlider
           title="Top rated"
-          data={data != undefined ? data[2].data.results : []}
+          data={data !== undefined ? data[2].data.results : []}
         />
         <SectionSlider
           title="Upcoming"
-          data={data != undefined ? data[3].data.results : []}
+          data={data !== undefined ? data[3].data.results : []}
         />
       </div>
       {/* right section */}

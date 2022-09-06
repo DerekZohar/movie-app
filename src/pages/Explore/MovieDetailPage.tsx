@@ -1,11 +1,27 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { getDetailFilm } from "../../shared/home";
 import { useQuery } from "react-query";
-import { IMAGE_URL } from "../../shared/constants";
+import { useParams } from "react-router-dom";
 import getImage from "../../shared/getImage";
-import { useGenre } from "../../hooks/useGenre";
-import { url } from "inspector";
+import { getDetailFilm } from "../../shared/home";
+
+const Cast = ({ cast }: any) => {
+  return (
+    <div className="flex gap-4 items-center">
+      <img
+        src={
+          cast.profile_path == null
+            ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc4rdi7yIcgCYMI76dCj_182YiiGyPN-TXzQ&usqp=CAU"
+            : getImage(cast.profile_path, "/original")
+        }
+        alt=""
+        className="rounded-full h-16 w-16"
+      />
+      <div>
+        <h1 className="text-lg font-bold">{cast.name}</h1>
+        <p className="text-sm text-gray-300">{cast.character}</p>
+      </div>
+    </div>
+  );
+};
 
 export const MovieDetailPage = () => {
   const params = useParams();
@@ -18,15 +34,15 @@ export const MovieDetailPage = () => {
   if (!data) return null;
   let film = data[0].data;
   let credits = data[1].data;
-
-  console.log(credits);
+  let videos = data[4].data;
+  console.log(videos);
 
   if (!params.id) return <div>404</div>;
   console.log(film);
   return (
-    <div className="relative flex justify-center items-center h-screen w-screen ">
+    <div className="relative flex justify-center items-center h-screen ">
       <div
-        className="absolute top-0 left-0 h-full w-full bg-center brightness-50 opacity-95"
+        className="absolute top-0 left-0 h-screen  w-full bg-center brightness-50 opacity-95"
         style={{
           backgroundImage: `url(${getImage(film.backdrop_path, "/original")})`,
         }}
@@ -45,8 +61,8 @@ export const MovieDetailPage = () => {
             alt=""
             className="w-[200px] h-[300px] rounded-md"
           />
-          <div>
-            <div className="flex justify-between">
+          <div className="flex-1">
+            <div className="flex justify-between w-full">
               <div>
                 <div className="flex items-center gap-2">
                   <p className="text-white">Movie</p>
@@ -63,9 +79,12 @@ export const MovieDetailPage = () => {
                 </h1>
               </div>
 
-              <div className="flex justify-center items-center gap-2 bg-yellow-400 rounded-l-full w-[200px]">
-                <p className="text-[48px] text-white">{film.vote_average}</p>
-                <div className="text-gray-400 text-sm">
+              <div
+                className="flex justify-center items-center gap-2 bg-yellow-400 rounded-l-full 
+              w-[150px]"
+              >
+                <p className="text-[32px] text-white">{film.vote_average}</p>
+                <div className="text-gray-100 text-sm">
                   <p>/10</p>
                   <p>{film.vote_count}</p>
                 </div>
@@ -88,7 +107,67 @@ export const MovieDetailPage = () => {
               <p className="">Release date: {film.release_date}</p>
               <p>Time: {film.runtime} minutes</p>
 
-              <p className="mt-4">{film.overview}</p>
+              <p className="mt-4 lime-clamp-4">{film.overview}</p>
+
+              <div className="mt-2 flex gap-4 h-12">
+                <button className="text-xl w-[200px] h-12 bg-red-600 text-white rounded-md cursor-pointer">
+                  Watch
+                </button>
+                <button className="w-12 h-12 flex justify-center items-center border rounded-full">
+                  <img
+                    src="/icons/sidebar/bookmark.svg"
+                    alt=""
+                    className="w-6 h-6 invert"
+                  />
+                </button>
+                <button className="w-12 h-12 flex justify-center items-center border rounded-full">
+                  <img
+                    src="/icons/share.svg"
+                    alt=""
+                    className="w-6 h-6 invert"
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <div className="text-white mt-8">
+            <p className="text-xl uppercase tracking-widest font-semibold">
+              Cast
+            </p>
+            <div className="mt-4 grid grid-cols-4 space-y-2">
+              {credits.cast.slice(0, 8).map((cast: any) => (
+                <Cast key={cast.cast_id} cast={cast} />
+              ))}
+            </div>
+          </div>
+          <div className="text-white">
+            <p className="text-xl uppercase tracking-widest font-semibold">
+              Media
+            </p>
+            <div className="mt-4 grid grid-cols-4 gap-4">
+              {videos.results.slice(0, 8).map((video: any) => (
+                <div key={video.id}>
+                  <div className="relative h-0 pb-[56.25%]">
+                    <iframe
+                      frameBorder="0"
+                      allowFullScreen
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      title="Video trailer"
+                      width="100%"
+                      height="100%"
+                      src={`https://www.youtube.com/embed/${video.key}?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1`}
+                      id="widget2"
+                      className="absolute top-0 left-0 !w-full !h-full"
+                    ></iframe>
+                  </div>
+                  <p className="mt-2 text-lg whitespace-nowrap overflow-hidden text-ellipsis">
+                    {video.name}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>

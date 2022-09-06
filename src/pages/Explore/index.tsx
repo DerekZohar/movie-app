@@ -1,10 +1,8 @@
-import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useInfiniteQuery } from "react-query";
 import { Film } from "../../components/Common/Film";
 import { TypeSelect } from "../../components/Common/TypeSelect";
 import { getExploreFilms } from "../../shared/home";
-import { useQuery, useInfiniteQuery } from "react-query";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 export const ExplorePage = () => {
   // const [filterClicked, setFilterClicked] = useState(false);
