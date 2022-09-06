@@ -1,9 +1,9 @@
 import { useQuery } from "react-query";
 import { getGenres } from "../shared/home";
 
-interface Props {
-  type?: "tv" | "movie";
-}
+// interface Props {
+//   type?: "tv" | "movie";
+// }
 
 /**
  * get genres for tv and movies

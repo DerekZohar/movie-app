@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import { HomeLayout } from "./components/Layouts/HomeLayout";
 import { ExplorePage } from "./pages/Explore";
@@ -26,9 +26,7 @@ function App() {
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="parties" element={<PartiesPage />} />
       </Route>
-      <Route path="/movie/:id" element={<HomeLayout />}>
-        <Route index element={<MovieDetailPage />} />
-      </Route>
+      <Route path="/movie/:id" element={<MovieDetailPage />}></Route>
       <Route path="/explore" element={<HomeLayout />}>
         <Route index element={<ExplorePage />} />
       </Route>

@@ -1,17 +1,17 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { getDetailFilm } from "../../shared/home";
 import { useQuery } from "react-query";
-import { IMAGE_URL } from "../../shared/constants";
+import { useParams } from "react-router-dom";
 import getImage from "../../shared/getImage";
-import { useGenre } from "../../hooks/useGenre";
-import { url } from "inspector";
+import { getDetailFilm } from "../../shared/home";
 
 const Cast = ({ cast }: any) => {
   return (
     <div className="flex gap-4 items-center">
       <img
-        src={getImage(cast.profile_path, "/original")}
+        src={
+          cast.profile_path == null
+            ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRc4rdi7yIcgCYMI76dCj_182YiiGyPN-TXzQ&usqp=CAU"
+            : getImage(cast.profile_path, "/original")
+        }
         alt=""
         className="rounded-full h-16 w-16"
       />
@@ -61,8 +61,8 @@ export const MovieDetailPage = () => {
             alt=""
             className="w-[200px] h-[300px] rounded-md"
           />
-          <div>
-            <div className="flex justify-between">
+          <div className="flex-1">
+            <div className="flex justify-between w-full">
               <div>
                 <div className="flex items-center gap-2">
                   <p className="text-white">Movie</p>
@@ -83,7 +83,7 @@ export const MovieDetailPage = () => {
                 className="flex justify-center items-center gap-2 bg-yellow-400 rounded-l-full 
               w-[150px]"
               >
-                <p className="text-[48px] text-white">{film.vote_average}</p>
+                <p className="text-[32px] text-white">{film.vote_average}</p>
                 <div className="text-gray-100 text-sm">
                   <p>/10</p>
                   <p>{film.vote_count}</p>

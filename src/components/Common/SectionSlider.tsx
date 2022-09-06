@@ -3,7 +3,6 @@ import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Film } from "../../components/Common/Film";
 import useSwiperRef from "../../hooks/useSwiperRef";
-import { PartyCard } from "./PartyCard";
 
 interface Props {
   title: string;
