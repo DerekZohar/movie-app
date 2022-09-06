@@ -3,6 +3,3 @@
   functions = "out_functions"
   publish   = "."
 
-[env]
-  REACT_APP_API_URL=https://api.themoviedb.org/3/
-  REACT_APP_API_KEY=6e960ead0143785d04703c3760141791
