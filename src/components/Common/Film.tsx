@@ -10,7 +10,11 @@ export const Film = (props: any) => {
       onClick={() => navigate("/movie/" + props.id)}
     >
       <img
-        src={IMAGE_URL + "/w342" + props.poster_path}
+        src={
+          props.poster_path
+            ? IMAGE_URL + "/w342" + props.poster_path
+            : "http://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"
+        }
         alt=""
         className="w-full h-[90%] rounded-md object-cover"
       />

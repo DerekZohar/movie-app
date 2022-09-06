@@ -7,14 +7,12 @@ import { WishlistCard } from "../../components/Home/WishlistCard";
 import { getHomeFilms } from "../../shared/home";
 
 export default function Home() {
-  const {  data } = useQuery("home", () =>
-    getHomeFilms("movie")
-  );
+  const { data } = useQuery("home", () => getHomeFilms("movie"));
 
   return (
     <div className="flex">
       {/* content */}
-      <div className="w-[800px] flex flex-col gap-6 p-8">
+      <div className="w-[900px] flex flex-col gap-6 p-8">
         <div className="flex justify-between items-center">
           <TypeSelect />
           <div>Light/Night</div>
@@ -39,7 +37,7 @@ export default function Home() {
       </div>
       {/* right section */}
       <div className="w-[30%] h-screen border-l-2  pt-6 px-8 sticky top-0">
-        <SearchInput />
+        {/* <SearchInput /> */}
 
         {/* <div className="flex gap-2 flex-wrap mt-4">
           {["Action", "Adventure", "Comedy", "Crime", "Drama", "Fantasy"].map(

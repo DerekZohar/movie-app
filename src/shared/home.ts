@@ -42,3 +42,12 @@ export const getWatchFilm = (
     axiosClient.get(`/${type}/${id}`),
     axiosClient.get(`/${type}/${id}/recommendations`),
   ]);
+export const getSearchKeyword = async (query: string): Promise<string[]> => {
+  return (
+    await axiosClient.get("/search/movie", {
+      params: {
+        query,
+      },
+    })
+  ).data.results;
+};
