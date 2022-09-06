@@ -7,7 +7,7 @@ import { WishlistCard } from "../../components/Home/WishlistCard";
 import { getHomeFilms } from "../../shared/home";
 
 export default function Home() {
-  const { isLoading, isFetched, data } = useQuery("home", () =>
+  const {  data } = useQuery("home", () =>
     getHomeFilms("movie")
   );
 

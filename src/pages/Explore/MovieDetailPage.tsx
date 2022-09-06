@@ -25,7 +25,7 @@ const Cast = ({ cast }: any) => {
 
 export const MovieDetailPage = () => {
   const params = useParams();
-  const { data, isFetched } = useQuery("detail-movie", () => {
+  const { data } = useQuery("detail-movie", () => {
     if (params.id) {
       return getDetailFilm("movie", +params.id);
     }

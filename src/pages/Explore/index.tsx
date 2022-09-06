@@ -16,7 +16,6 @@ export const ExplorePage = () => {
   // const films = data != undefined ? data?.data.results : [];
   const {
     data: movies,
-    error: errorMovies,
     fetchNextPage: fetchNextPageMovie,
     hasNextPage: hasNextPageMovie,
   } = useInfiniteQuery(
