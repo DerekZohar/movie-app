@@ -14,7 +14,9 @@ export const Cast = ({ cast }: any) => {
       />
       <div>
         <h1 className="text-lg font-bold">{cast.name}</h1>
-        <p className="text-sm text-gray-300">{cast.character}</p>
+        <p className="text-sm text-gray-400 dark:text-gray-300">
+          {cast.character}
+        </p>
       </div>
     </div>
   );

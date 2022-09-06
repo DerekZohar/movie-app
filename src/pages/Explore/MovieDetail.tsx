@@ -22,7 +22,7 @@ export const MovieDetail = () => {
   let videos = data[3].data;
 
   return (
-    <div className="bg-black h-fit">
+    <div className="bg-white h-fit">
       <div className="relative flex justify-center items-center">
         <div
           id="banner-movie"
@@ -128,7 +128,7 @@ export const MovieDetail = () => {
       </div>
 
       <div className="w-[80%] mx-auto flex flex-col gap-8">
-        <div className="text-white mt-8">
+        <div className="text-black dark:text-white mt-8">
           <p className="text-xl uppercase tracking-widest font-semibold">
             Cast
           </p>
@@ -166,7 +166,7 @@ export const MovieDetail = () => {
           </div>
         </div>
 
-        <div className="text-white ">
+        <div className="text-black dark:text-white ">
           {/* <SectionSlider
             title="Similar"
             data={similarVideos.slice(0, 8)}
@@ -175,7 +175,7 @@ export const MovieDetail = () => {
           <p className="text-xl uppercase tracking-widest font-semibold">
             Similar
           </p>
-          <div className="mt-4 grid grid-cols-5 gap-8 space-y-4">
+          <div className="mt-4 grid grid-cols-5 gap-8">
             {similarVideos.slice(0, 10).map((film: any) => (
               <Film key={film.title} {...film} />
             ))}
