@@ -2,6 +2,7 @@ import { Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useGenre } from "../../hooks/useGenre";
 import { IMAGE_URL } from "../../shared/constants";
+import { GenreTag } from "../Common/GenreTag";
 
 interface BannerProps {
   type: "movie" | "tv";
@@ -88,12 +89,7 @@ const BannerItem = (props: any) => {
         </div>
         <div className="flex gap-2 flex-wrap">
           {genres.map((genre: any) => (
-            <span
-              key={genre.id}
-              className="text-sm text-gray-400 border border-gray-400 rounded-full px-2 py-1 mr-1"
-            >
-              {genre.name}
-            </span>
+            <GenreTag key={genre.id} name={genre.name} />
           ))}
         </div>
         <p className="text-gray-400 line-clamp-4">{props.overview}</p>

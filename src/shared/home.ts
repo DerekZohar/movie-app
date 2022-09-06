@@ -29,7 +29,16 @@ export const getDetailFilm = (type: "movie" | "tv" | "anime", id: number) =>
   Promise.all([
     axiosClient.get(`/${type}/${id}`),
     axiosClient.get(`/${type}/${id}/credits`),
-    axiosClient.get(`/${type}/${id}/reviews`),
+    // axiosClient.get(`/${type}/${id}/reviews`),
     axiosClient.get(`/${type}/${id}/similar`),
     axiosClient.get(`/${type}/${id}/videos`),
+  ]);
+
+export const getWatchFilm = (
+  type: "movie" | "tv" | "anime",
+  id: number | string
+) =>
+  Promise.all([
+    axiosClient.get(`/${type}/${id}`),
+    axiosClient.get(`/${type}/${id}/recommendations`),
   ]);

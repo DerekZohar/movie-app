@@ -18,8 +18,8 @@ export const MovieDetail = () => {
   if (!data) return null;
   let film = data[0].data;
   let credits = data[1].data;
-  let similarVideos = data[3].data.results;
-  let videos = data[4].data;
+  let similarVideos = data[2].data.results;
+  let videos = data[3].data;
 
   return (
     <div className="bg-black h-fit">
@@ -50,7 +50,7 @@ export const MovieDetail = () => {
               src="/icons/play.svg"
               alt=""
               className="w-12 h-12 hidden group-hover:block z-10 cursor-pointer"
-              onClick={() => navigate("/watch")}
+              onClick={() => navigate(window.location.pathname + "/watch")}
             />
 
             <div className="absolute top-1 left-0 w-full flex justify-between invert px-1">
@@ -64,11 +64,11 @@ export const MovieDetail = () => {
                 <div className="flex items-center gap-2">
                   <p className="text-white">Movie</p>
                   <div className="w-[2px] h-[16px] bg-gray-400"></div>
-                  <p className="text-red-500">
+                  <div className="text-red-500">
                     {film.genres
                       .map((genre: { name: string; id: number }) => genre.name)
                       .join(", ")}
-                  </p>
+                  </div>
                 </div>
 
                 <h1 className="text-4xl text-white font-bold mt-2">
@@ -93,14 +93,14 @@ export const MovieDetail = () => {
                 Rating: {film.vote_average}{" "}
                 <span className="text-[10px]">({film.vote_count})</span>
               </p> */}
-              <p className="flex gap-2">
+              <div className="flex gap-2">
                 <p>Languages: </p>
                 <span className="flex items-center gap-2">
                   {film.spoken_languages
                     .map((lang: any) => lang.english_name)
                     .join(", ")}
                 </span>
-              </p>
+              </div>
               <p className="">Release date: {film.release_date}</p>
               <p>Time: {film.runtime} minutes</p>
 

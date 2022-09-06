@@ -26,9 +26,8 @@ function App() {
         <Route path="history" element={<HistoryPage />} />
         <Route path="wishlist" element={<WishlistPage />} />
         <Route path="parties" element={<PartiesPage />} />
-        <Route path="/movie/:id" element={<MovieDetail />}>
-          <Route path="watch" element={<MovieWatch />} />
-        </Route>
+        <Route path="movie/:id" element={<MovieDetail />}></Route>
+        <Route path="movie/:id/watch" element={<MovieWatch />} />
       </Route>
       {/* <Route path="/movie/:id" element={<MovieDetail />}></Route> */}
       <Route path="/explore" element={<HomeLayout />}>
