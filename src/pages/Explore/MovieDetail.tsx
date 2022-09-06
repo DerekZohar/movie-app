@@ -21,17 +21,18 @@ export const MovieDetail = () => {
 
   return (
     <div className="bg-black h-fit">
-      <div
-        id="banner-movie"
-        className="h-[70vh] w-full bg-cover brightness-50 opacity-95"
-        style={{
-          backgroundImage: `url(${getImage(film.backdrop_path, "/original")})`,
-        }}
-      ></div>
-
-      <div className="relative top-10 w-[80%] mx-auto -mt-[400px]">
-        {/* info */}
-        <div className="flex gap-12">
+      <div className="relative flex justify-center items-center">
+        <div
+          id="banner-movie"
+          className="h-[70vh] w-full bg-cover brightness-50 opacity-95"
+          style={{
+            backgroundImage: `url(${getImage(
+              film.backdrop_path,
+              "/original"
+            )})`,
+          }}
+        ></div>
+        <div className="absolute top-20 flex gap-12 w-[80%] ">
           <div className="flex justify-center items-center relative w-[200px] h-[300px] rounded-md group">
             <div
               className="absolute top-0 left-0 w-full h-full transition .3s ease bg-center bg-cover 
@@ -121,53 +122,52 @@ export const MovieDetail = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* media, cast, similar */}
-        <div className="flex flex-col gap-8 mt-10">
-          <div className="text-white mt-8">
-            <p className="text-xl uppercase tracking-widest font-semibold">
-              Cast
-            </p>
-            <div className="mt-4 grid grid-cols-4 space-y-2">
-              {credits.cast.slice(0, 8).map((cast: any) => (
-                <Cast key={cast.cast_id} cast={cast} />
-              ))}
-            </div>
+      <div className="w-[80%] mx-auto flex flex-col gap-8">
+        <div className="text-white mt-8">
+          <p className="text-xl uppercase tracking-widest font-semibold">
+            Cast
+          </p>
+          <div className="mt-4 grid grid-cols-4 space-y-2">
+            {credits.cast.slice(0, 8).map((cast: any) => (
+              <Cast key={cast.cast_id} cast={cast} />
+            ))}
           </div>
-          <div className="text-white">
-            <p className="text-xl uppercase tracking-widest font-semibold">
-              Media
-            </p>
-            <div className="mt-4 grid grid-cols-3 gap-8">
-              {videos.results.slice(0, 6).map((video: any) => (
-                <div key={video.id}>
-                  <div className="relative h-0 pb-[56.25%]">
-                    <iframe
-                      frameBorder="0"
-                      allowFullScreen
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      title="Video trailer"
-                      width="100%"
-                      height="100%"
-                      src={`https://www.youtube.com/embed/${video.key}?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1`}
-                      id="widget2"
-                      className="absolute top-0 left-0 !w-full !h-full"
-                    ></iframe>
-                  </div>
-                  <p className="mt-2 text-lg whitespace-nowrap overflow-hidden text-ellipsis">
-                    {video.name}
-                  </p>
+        </div>
+        <div className="text-white">
+          <p className="text-xl uppercase tracking-widest font-semibold">
+            Media
+          </p>
+          <div className="mt-4 grid grid-cols-3 gap-8">
+            {videos.results.slice(0, 6).map((video: any) => (
+              <div key={video.id}>
+                <div className="relative h-0 pb-[56.25%]">
+                  <iframe
+                    frameBorder="0"
+                    allowFullScreen
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    title="Video trailer"
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${video.key}?enablejsapi=1&amp;origin=http%3A%2F%2Flocalhost%3A3000&amp;widgetid=1`}
+                    id="widget2"
+                    className="absolute top-0 left-0 !w-full !h-full"
+                  ></iframe>
                 </div>
-              ))}
-            </div>
+                <p className="mt-2 text-lg whitespace-nowrap overflow-hidden text-ellipsis">
+                  {video.name}
+                </p>
+              </div>
+            ))}
           </div>
-          <div className="text-white">
-            <SectionSlider
-              title="Similar"
-              data={similarVideos.slice(0, 8)}
-              className="text-xl uppercase tracking-widest font-semibold mb-4"
-            />
-          </div>
+        </div>
+        <div className="text-white">
+          <SectionSlider
+            title="Similar"
+            data={similarVideos.slice(0, 8)}
+            className="text-xl uppercase tracking-widest font-semibold mb-4"
+          />
         </div>
       </div>
     </div>
