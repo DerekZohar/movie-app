@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, HashRouter } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
@@ -18,13 +18,13 @@ const queryClient = new QueryClient();
 
 root.render(
   // <React.StrictMode>
-  <BrowserRouter>
+  <HashRouter>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <App />
       </Provider>
     </QueryClientProvider>
-  </BrowserRouter>
+  </HashRouter>
   // </React.StrictMode>
 );
 

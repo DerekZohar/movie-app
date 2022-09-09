@@ -1,6 +1,10 @@
 import React from "react";
 
-export const SearchInput = () => {
+interface SearchProps {
+  keyword: string;
+  setKeyword: (keyword: string) => void;
+}
+export const SearchInput = (props: SearchProps) => {
   return (
     <div
       className="h-[40px] w-full flex justify-center items-center border-2 border-gray-200 
@@ -24,6 +28,8 @@ export const SearchInput = () => {
         type="text"
         placeholder="Search for anything"
         className="flex-1 outline-none border-none bg-transparent font-normal text-sm"
+        value={props.keyword}
+        onChange={(e) => props.setKeyword(e.target.value)}
       />
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -32,6 +38,8 @@ export const SearchInput = () => {
         strokeWidth={1.5}
         stroke="currentColor"
         className="w-4 h-4 cursor-pointer"
+        onClick={() => props.setKeyword("")}
+        style={{ display: props.keyword ? "block" : "none" }}
       >
         <path
           strokeLinecap="round"

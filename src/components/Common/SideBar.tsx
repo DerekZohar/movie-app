@@ -47,12 +47,12 @@ export const SideBar = () => {
       }
     >
       <div className="h-full w-full border-r-2 pl-12 py-4 flex flex-col ">
-        <img
+        {/* <img
           src="/icons/left.svg"
           alt=""
           className="w-4 h-4 border rounded-full absolute top-4 -right-2 cursor-pointer bg-white"
           onClick={() => setSbOpen((val) => !val)}
-        />
+        /> */}
         <h2 className="text-2xl font-medium">MoClub</h2>
 
         <div className="flex-1 flex flex-col justify-between">
