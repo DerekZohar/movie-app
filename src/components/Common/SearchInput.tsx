@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useDeferredValue } from "react";
-import { getSearchByKeyword, getSearchKeywordList } from "../../shared/home";
+import React, { useDeferredValue, useState } from "react";
+import { getSearchKeywordList } from "../../shared/home";
 import { useAppDispatch } from "../../store/hooks";
 import { getHistory } from "../../store/store";
 import { addNewHistory, removeHistory } from "../../store/user/userSlice";
@@ -15,6 +15,7 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
   const [shouldModalShow, setShouldModalShow] = useState(false);
   const dispatch = useAppDispatch();
   const history = getHistory();
+  const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
 
   console.log(history);
 
@@ -44,6 +45,7 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
 
   const handleHistoryItemRemoved = (selectedKeyword: string) => {
     dispatch(removeHistory(selectedKeyword));
+    forceUpdate();
   };
 
   return (

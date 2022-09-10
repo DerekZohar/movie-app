@@ -18,7 +18,7 @@ export const Film = (props: any) => {
         alt=""
         className="w-full h-[90%] rounded-md object-cover"
       />
-      <p className="text-center font-semibold">
+      <p className="text-center font-semibold line-clamp-3">
         {props.original_name || props.original_title}
       </p>
       <div className="flex absolute top-[2%] right-[3%] bg-blue-500 px-2 rounded-full text-white items-center gap-1">

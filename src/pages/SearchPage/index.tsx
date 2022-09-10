@@ -46,6 +46,7 @@ export const SearchPage = () => {
             results.map((film: any) => <Film key={film.id} {...film} />)}
         </div>
       </div>
+      <div className="h-8"></div>
     </div>
   );
 };
