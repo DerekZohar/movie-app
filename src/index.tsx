@@ -18,13 +18,13 @@ const queryClient = new QueryClient();
 
 root.render(
   // <React.StrictMode>
-  <HashRouter>
+  <BrowserRouter>
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <App />
       </Provider>
     </QueryClientProvider>
-  </HashRouter>
+  </BrowserRouter>
   // </React.StrictMode>
 );
 

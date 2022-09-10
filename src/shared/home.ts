@@ -42,7 +42,7 @@ export const getWatchFilm = (
     axiosClient.get(`/${type}/${id}`),
     axiosClient.get(`/${type}/${id}/recommendations`),
   ]);
-export const getSearchKeyword = async (query: string): Promise<string[]> => {
+export const getSearchByKeyword = async (query: string): Promise<string[]> => {
   return (
     await axiosClient.get("/search/movie", {
       params: {
@@ -50,4 +50,18 @@ export const getSearchKeyword = async (query: string): Promise<string[]> => {
       },
     })
   ).data.results;
+};
+
+export const getSearchKeywordList = async (
+  query: string
+): Promise<string[]> => {
+  return (
+    await axiosClient.get("/search/keyword", {
+      params: {
+        query,
+      },
+    })
+  ).data.results
+    .map((item: any) => item.name)
+    .filter((_: any, index: number) => index < 5);
 };

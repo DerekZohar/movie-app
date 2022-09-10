@@ -1,23 +1,24 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Film } from "../../components/Common/Film";
 import { SearchInput } from "../../components/Common/SearchInput";
-import { getSearchKeyword } from "../../shared/home";
+import { getSearchByKeyword, getSearchKeywordList } from "../../shared/home";
 
 let isInitial = true;
 export const SearchPage = () => {
-  const [keyword, setKeyword] = useState("");
+  const [selectedKeyword, setSelectedKeyword] = useState("");
   const [results, setResults] = useState([]);
-  const timeoutRef = useRef<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getSearchKeyword(keyword.trim());
+      const res = await getSearchByKeyword(selectedKeyword.trim());
 
       setResults(res as []);
     };
 
-    fetchData();
-  }, [keyword]);
+    if (selectedKeyword.trim().length > 0) {
+      fetchData();
+    }
+  }, [selectedKeyword]);
 
   return (
     <div className="p-8 ">
@@ -26,7 +27,10 @@ export const SearchPage = () => {
           <p className="text-xl font-semibold text-center mb-4">
             Search for movie, anime, author, cast, etc
           </p>
-          <SearchInput keyword={keyword} setKeyword={setKeyword} />
+          <SearchInput
+            // keyword={selectedKeyword}
+            setSelectedKeyword={setSelectedKeyword}
+          />
 
           {results.length === 0 && (
             <img
