@@ -6,17 +6,26 @@ import { TypeSelect } from "../../components/Common/TypeSelect";
 import { Banner } from "../../components/Home/Banner";
 import { WishlistCard } from "../../components/Home/WishlistCard";
 import { getHomeFilms } from "../../shared/home";
+import { useAppDispatch } from "../../store/hooks";
+import { setDarkMode } from "../../store/user/userSlice";
 
 export default function Home() {
+  const dispatch = useAppDispatch();
   const { data } = useQuery("home", () => getHomeFilms("movie"));
 
+  const toggleDarkMode = (value: boolean) => {
+    dispatch(setDarkMode(value));
+  };
   return (
-    <div className="flex">
+    <div className="flex dark:bg-black">
       {/* content */}
       <div className="w-[900px] flex flex-col gap-6 p-8">
         <div className="flex justify-between items-center">
           <TypeSelect />
-          <div>Light/Night</div>
+          <div className="flex gap-2 cursor-pointer">
+            <p onClick={() => toggleDarkMode(false)}>Light</p>
+            <p onClick={() => toggleDarkMode(true)}>Night</p>
+          </div>
         </div>
         <Banner
           data={data !== undefined ? data[0].data.results : []}

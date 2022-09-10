@@ -1,8 +1,7 @@
 import React, { useDeferredValue, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getSearchKeywordList } from "../../shared/home";
-import { useAppDispatch } from "../../store/hooks";
-import { getHistory } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addNewHistory, removeHistory } from "../../store/user/userSlice";
 
 interface SearchProps {
@@ -17,8 +16,7 @@ export const SearchInput = () => {
   const [shouldModalShow, setShouldModalShow] = useState(false);
 
   const dispatch = useAppDispatch();
-  const history = getHistory();
-  const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
+  const history = useAppSelector((state) => state.user.history);
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -48,7 +46,6 @@ export const SearchInput = () => {
 
   const handleHistoryItemRemoved = (selectedKeyword: string) => {
     dispatch(removeHistory(selectedKeyword));
-    forceUpdate();
   };
 
   const onEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
