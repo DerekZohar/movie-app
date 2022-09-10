@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface UserState {
-  info: {};
   darkMode: boolean;
   history: string[];
 }
 
 const initialState: UserState = {
-  info: {},
   darkMode: false,
   history: [] as string[],
 };
