@@ -1,4 +1,5 @@
 import React, { useDeferredValue, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { getSearchKeywordList } from "../../shared/home";
 import { useAppDispatch } from "../../store/hooks";
 import { getHistory } from "../../store/store";
@@ -8,16 +9,17 @@ interface SearchProps {
   // keyword: string;
   setSelectedKeyword: (keyword: string) => void;
 }
-export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
-  const [keyword, setKeyword] = useState("");
+export const SearchInput = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [keyword, setKeyword] = useState(searchParams.get("query") || "");
   const deferredSearch = useDeferredValue(keyword);
   const [recommendKeywords, setRecommendKeywords] = useState([]);
   const [shouldModalShow, setShouldModalShow] = useState(false);
+
   const dispatch = useAppDispatch();
   const history = getHistory();
   const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void;
-
-  console.log(history);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -34,18 +36,35 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
   }, [deferredSearch]);
 
   const handleKeywordClicked = (recKeyword: string) => {
-    setSelectedKeyword(recKeyword);
     setKeyword(recKeyword);
     setRecommendKeywords([]);
+    navigate({
+      pathname: "/search",
+      search: `?query=${recKeyword}`,
+    });
 
-    if (!history.includes(recKeyword)) {
-      dispatch(addNewHistory(recKeyword));
-    }
+    saveHistory(recKeyword);
   };
 
   const handleHistoryItemRemoved = (selectedKeyword: string) => {
     dispatch(removeHistory(selectedKeyword));
     forceUpdate();
+  };
+
+  const onEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      navigate({
+        pathname: "/search",
+        search: `?query=${keyword}`,
+      });
+      saveHistory(keyword);
+    }
+  };
+
+  const saveHistory = (inputValue: string) => {
+    if (!history.includes(inputValue)) {
+      dispatch(addNewHistory(inputValue));
+    }
   };
 
   return (
@@ -76,6 +95,7 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
           onChange={(e) => setKeyword(e.target.value)}
           onFocus={() => setShouldModalShow(true)}
           onBlur={() => setShouldModalShow(false)}
+          onKeyDown={onEnterDown}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -96,34 +116,35 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
       </div>
 
       {(recommendKeywords.length > 0 || history.length > 0) && shouldModalShow && (
-        <div className="absolute top-12 left-0 bg-white w-full border py-2 flex flex-col gap-2 z-10 rounded-md">
-          {history.map((recKeyword: any) => (
-            <div
-              className="flex gap-2 items-center w-full px-3 py-2 hover:bg-gray-200"
-              key={recKeyword}
-            >
-              <img
-                src="/icons/sidebar/history.svg"
-                alt=""
-                className="w-4 h-4"
-              />
-              <p
-                className="flex-1"
-                onMouseDown={() => handleKeywordClicked(recKeyword)}
+        <div className="absolute top-12 left-0 max-h-[400px] bg-white w-full border py-2 flex flex-col gap-0 z-10 rounded-md">
+          {recommendKeywords.length === 0 &&
+            history.map((recKeyword: any) => (
+              <div
+                className="flex gap-2 items-center w-full px-3 py-2 hover:bg-gray-200"
+                key={recKeyword}
               >
-                {recKeyword}
-              </p>
-              <p
-                className="text-gray-400 hover:text-red-500 cursor-pointer text-sm"
-                onMouseDown={(e) => {
-                  handleHistoryItemRemoved(recKeyword);
-                  e.preventDefault();
-                }}
-              >
-                Remove
-              </p>
-            </div>
-          ))}
+                <img
+                  src="/icons/sidebar/history.svg"
+                  alt=""
+                  className="w-4 h-4"
+                />
+                <p
+                  className="flex-1"
+                  onMouseDown={() => handleKeywordClicked(recKeyword)}
+                >
+                  {recKeyword}
+                </p>
+                <p
+                  className="text-gray-400 hover:text-red-500 cursor-pointer text-sm"
+                  onMouseDown={(e) => {
+                    handleHistoryItemRemoved(recKeyword);
+                    e.preventDefault();
+                  }}
+                >
+                  Remove
+                </p>
+              </div>
+            ))}
 
           {recommendKeywords.map((recKeyword: any) => (
             <div

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { SearchInput } from "../../components/Common/SearchInput";
 import { SectionSlider } from "../../components/Common/SectionSlider";
@@ -37,7 +38,7 @@ export default function Home() {
       </div>
       {/* right section */}
       <div className="w-[30%] h-screen border-l-2  pt-6 px-8 sticky top-0">
-        {/* <SearchInput /> */}
+        <SearchInput />
 
         {/* <div className="flex gap-2 flex-wrap mt-4">
           {["Action", "Adventure", "Comedy", "Crime", "Drama", "Fantasy"].map(
