@@ -1,12 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface UserState {
+  info: {};
+  darkMode: boolean;
+  history: string[];
+}
+
+const initialState: UserState = {
+  info: {},
+  darkMode: false,
+  history: [] as string[],
+};
+
 const userSlice = createSlice({
-  initialState: {
-    info: {},
-    darkMode: false,
-    history: [] as string[],
-  },
   name: "user",
+  initialState,
   reducers: {
     setDarkMode: (state, action) => {
       state.darkMode = action.payload;

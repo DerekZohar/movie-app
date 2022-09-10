@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Provider } from "react-redux";
 import { BrowserRouter, HashRouter } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+
 import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/navigation";
@@ -10,7 +12,7 @@ import "swiper/css/pagination";
 import App from "./App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./store/store";
+import { persistor, store } from "./store/store";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -20,9 +22,11 @@ root.render(
   // <React.StrictMode>
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <PersistGate loading={null} persistor={persistor}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </PersistGate>
     </QueryClientProvider>
   </BrowserRouter>
   // </React.StrictMode>

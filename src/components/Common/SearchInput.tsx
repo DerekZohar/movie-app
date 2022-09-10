@@ -34,6 +34,7 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
 
   const handleKeywordClicked = (recKeyword: string) => {
     setSelectedKeyword(recKeyword);
+    setKeyword(recKeyword);
     setRecommendKeywords([]);
 
     if (!history.includes(recKeyword)) {
@@ -71,8 +72,8 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
           className="flex-1 outline-none border-none bg-transparent font-normal text-sm"
           value={keyword}
           onChange={(e) => setKeyword(e.target.value)}
-          // onFocus={() => setShouldModalShow(true)}
-          // onBlur={() => setShouldModalShow(false)}
+          onFocus={() => setShouldModalShow(true)}
+          onBlur={() => setShouldModalShow(false)}
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +93,7 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
         </svg>
       </div>
 
-      {(recommendKeywords.length > 0 || history.length > 0) && (
+      {(recommendKeywords.length > 0 || history.length > 0) && shouldModalShow && (
         <div className="absolute top-12 left-0 bg-white w-full border py-2 flex flex-col gap-2 z-10 rounded-md">
           {history.map((recKeyword: any) => (
             <div
@@ -112,7 +113,10 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
               </p>
               <p
                 className="text-gray-400 hover:text-red-500 cursor-pointer text-sm"
-                onMouseDown={() => handleHistoryItemRemoved(recKeyword)}
+                onMouseDown={(e) => {
+                  handleHistoryItemRemoved(recKeyword);
+                  e.preventDefault();
+                }}
               >
                 Remove
               </p>
@@ -125,7 +129,10 @@ export const SearchInput = ({ setSelectedKeyword }: SearchProps) => {
               key={recKeyword}
             >
               <img src="/icons/sidebar/search.svg" alt="" className="w-4 h-4" />
-              <p className="" onClick={() => handleKeywordClicked(recKeyword)}>
+              <p
+                className=""
+                onMouseDown={() => handleKeywordClicked(recKeyword)}
+              >
                 {recKeyword}
               </p>
             </div>
