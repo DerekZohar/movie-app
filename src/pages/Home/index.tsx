@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useQuery } from "react-query";
 import { SearchInput } from "../../components/Common/SearchInput";
 import { SectionSlider } from "../../components/Common/SectionSlider";
@@ -17,7 +16,7 @@ export default function Home() {
     dispatch(setDarkMode(value));
   };
   return (
-    <div className="flex dark:bg-black">
+    <div className="flex dark:bg-dark dark:text-white">
       {/* content */}
       <div className="w-[900px] flex flex-col gap-6 p-8">
         <div className="flex justify-between items-center">
@@ -46,7 +45,7 @@ export default function Home() {
         />
       </div>
       {/* right section */}
-      <div className="w-[30%] h-screen border-l-2  pt-6 px-8 sticky top-0">
+      <div className="w-[30%] h-screen border-l-2 dark:border-gray-700 pt-6 px-8 sticky top-0">
         <SearchInput />
 
         {/* <div className="flex gap-2 flex-wrap mt-4">

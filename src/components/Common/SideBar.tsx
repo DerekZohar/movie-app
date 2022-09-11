@@ -1,21 +1,56 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { FaHome } from "react-icons/fa";
+import { MdExplore, MdHistory, MdLogin } from "react-icons/md";
+import { BsSearch, BsBookmarkHeartFill } from "react-icons/bs";
+import { GiPartyPopper } from "react-icons/gi";
+import { AiFillSetting } from "react-icons/ai";
+
+const size = 22;
 const sides = {
   menu: [
-    { path: "/", name: "Home", icon: "home.svg" },
-    { path: "/explore", name: "Explore", icon: "explore.svg" },
-    { path: "/search", name: "Search", icon: "search.svg" },
+    { path: "/", name: "Home", icon: <FaHome size={size} /> },
+    {
+      path: "/explore",
+      name: "Explore",
+      icon: <MdExplore size={size} />,
+    },
+    {
+      path: "/search",
+      name: "Search",
+      icon: <BsSearch size={size} />,
+    },
   ],
   social: [
-    { path: "/wishlist", name: "Wishlist", icon: "wishlist.svg" },
-    { path: "/history", name: "History", icon: "history.svg" },
-    { path: "/parties", name: "Parties", icon: "parties.svg" },
-    // { path: "/friends", name: "Friends", icon: "friends.svg" },
+    {
+      path: "/wishlist",
+      name: "Wishlist",
+      icon: <BsBookmarkHeartFill size={size} />,
+    },
+    {
+      path: "/history",
+      name: "History",
+      icon: <MdHistory size={size} />,
+    },
+    {
+      path: "/parties",
+      name: "Parties",
+      icon: <GiPartyPopper size={size} />,
+    },
+    // { path: "/friends", name: "Friends",icon: <FaHome  size={size} /> },
   ],
   general: [
-    { path: "/settings", name: "Settings", icon: "settings.svg" },
-    { path: "/login", name: "Login", icon: "login.svg" },
+    {
+      path: "/settings",
+      name: "Settings",
+      icon: <AiFillSetting size={size} />,
+    },
+    {
+      path: "/login",
+      name: "Login",
+      icon: <MdLogin size={size} />,
+    },
   ],
 };
 
@@ -42,7 +77,7 @@ export const SideBar = () => {
   return (
     <div
       className={
-        "h-screen sticky top-0 transition-all .3s ease-in-out " +
+        "h-screen sticky top-0 transition-all .3s ease-in-out dark:bg-dark dark:text-white " +
         (sbOpen ? "w-[250px]" : "w-[100px]")
       }
     >
@@ -59,7 +94,9 @@ export const SideBar = () => {
           <div className="flex flex-col gap-12 mt-6">
             {Object.entries(sides).map(([key, value]) => (
               <div key={key} className="">
-                <h4 className="text-gray-400 text-sm capitalize">{key}</h4>
+                <h4 className="text-gray-400 dark:text-gray-300 text-sm capitalize">
+                  {key}
+                </h4>
                 <div className="flex flex-col justify-center gap-6 mt-4 text-gray-400">
                   {value.map((route) => (
                     <div
@@ -72,7 +109,7 @@ export const SideBar = () => {
                       }
                       onClick={() => navigate(route.path)}
                     >
-                      <img src={"/icons/sidebar/" + route.icon} alt="" />
+                      {route.icon}
                       <p className="font-semibold">{route.name}</p>
                     </div>
                   ))}

@@ -4,12 +4,8 @@ import { getSearchKeywordList } from "../../shared/home";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addNewHistory, removeHistory } from "../../store/user/userSlice";
 
-interface SearchProps {
-  // keyword: string;
-  setSelectedKeyword: (keyword: string) => void;
-}
 export const SearchInput = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const [keyword, setKeyword] = useState(searchParams.get("query") || "");
   const deferredSearch = useDeferredValue(keyword);
   const [recommendKeywords, setRecommendKeywords] = useState([]);
