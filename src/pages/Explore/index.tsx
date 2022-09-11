@@ -27,7 +27,7 @@ export const ExplorePage = () => {
   );
 
   return (
-    <div className="p-8 flex  w-full">
+    <div className="p-8 flex  w-full dark:bg-dark dark:text-white">
       <div className=" w-full">
         <div className="flex justify-between items-center">
           <TypeSelect />

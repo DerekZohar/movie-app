@@ -24,7 +24,7 @@ export const SearchPage = () => {
   }, [query]);
 
   return (
-    <div className="p-8 ">
+    <div className="p-8 dark:bg-dark  h-full">
       <div className="w-[90%] mx-auto">
         <div className="w-[50%] mx-auto flex justify-center flex-col items-center">
           <p className="text-xl font-semibold text-center mb-4">
@@ -34,7 +34,8 @@ export const SearchPage = () => {
 
           {results.length === 0 && (
             <img
-              src="/icons/stickman-watching-tv.svg"
+              // src="/icons/stickman-watching-tv.svg"
+              src="watch.png"
               alt=""
               className="w-[400px] h-[400px]"
             />

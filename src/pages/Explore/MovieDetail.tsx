@@ -22,7 +22,7 @@ export const MovieDetail = () => {
   let videos = data[3].data;
 
   return (
-    <div className="bg-white h-fit">
+    <div className="bg-white dark:bg-dark h-fit">
       <div className="relative flex justify-center items-center">
         <div
           id="banner-movie"

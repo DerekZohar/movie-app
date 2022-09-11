@@ -81,7 +81,7 @@ export const SideBar = () => {
         (sbOpen ? "w-[250px]" : "w-[100px]")
       }
     >
-      <div className="h-full w-full border-r-2 pl-12 py-4 flex flex-col ">
+      <div className="h-full w-full border-r-2 dark:border-gray-700 pl-12 py-4 flex flex-col ">
         {/* <img
           src="/icons/left.svg"
           alt=""
